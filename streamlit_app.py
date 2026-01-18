@@ -1,22 +1,3 @@
-I see the problem in the screenshot.
-
-The big numbers (like $500,000) are bright blue and visible, but the Labels above them (like "Liquid Capital") are dark grey on a dark background. They are ghost text.
-
-We need to force those labels to be Pure White.
-
-The Fix (V11: High-Contrast Metrics Protocol)
-I am updating the code to target those specific "ghost labels" and turn them bright white so they pop against the dark blue cards.
-
-Go to GitHub.
-
-Open streamlit_app.py.
-
-Delete Everything.
-
-Paste this corrected code.
-
-Python
-
 import streamlit as st
 import pandas as pd
 import numpy as np
