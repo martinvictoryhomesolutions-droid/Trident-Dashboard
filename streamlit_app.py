@@ -1,26 +1,3 @@
-I see exactly what is happening in that screenshot.
-
-The text is "Dark Blue" on a "Black" background, making it impossible to read. This happens because the app is confused—it's trying to use "Light Mode" text on our "Dark Mode" background.
-
-We are going to switch to Trident V5 (High Contrast Protocol).
-
-This update does two specific things:
-
-Forces ALL text to White/Gold: No more invisible labels.
-
-Luxury Inputs: Instead of blinding white boxes, the input fields will now be "Matte Grey" with white text (easier on the eyes and looks more expensive).
-
-The Fix (V5 Code)
-Go to GitHub.
-
-Open streamlit_app.py.
-
-Delete Everything.
-
-Paste this fixed code:
-
-Python
-
 import streamlit as st
 import pandas as pd
 import numpy as np
