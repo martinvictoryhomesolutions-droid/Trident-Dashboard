@@ -24,7 +24,7 @@ if 'leads' not in st.session_state:
         "Offer_Price": [120000, 450000, 320000, 210000]
     })
 
-# --- 2. VISUAL IDENTITY (FIXED FOR VISIBILITY) ---
+# --- 2. VISUAL IDENTITY (HIGH CONTRAST) ---
 st.markdown("""
     <style>
     /* Main Background */
@@ -43,7 +43,7 @@ st.markdown("""
         font-size: 16px !important; /* Larger Font */
     }
     
-    /* RADIO BUTTONS (The Menu) */
+    /* RADIO BUTTONS */
     .stRadio label {
         color: #FFFFFF !important;
         font-weight: bold !important;
@@ -82,7 +82,7 @@ st.markdown("""
 # --- 3. SIDEBAR NAVIGATION ---
 with st.sidebar:
     st.title("🔱 TRIDENT OMNI")
-    st.markdown("### SYSTEM MODULES") # Using header to ensure visibility
+    st.markdown("### SYSTEM MODULES") 
     
     module = st.radio("NAVIGATE TO:", 
         ["COMMAND DASHBOARD", 
@@ -117,16 +117,37 @@ if module == "COMMAND DASHBOARD":
             'lat': [25.7617, 30.2672, 36.1627, 33.4484, 40.7128, 34.0522],
             'lon': [-80.1918, -97.7431, -86.7816, -112.0740, -74.0060, -118.2437],
             'Type': ['Rental (Cashflow)', 'BRRRR (In Progress)', 'Flip (Active)', 'Creative (Sub-To)', 'Wholesale Deal', 'Lead'],
-            'Size': [20, 20, 20, 20, 15, 10],
+            'Size': [25, 25, 25, 25, 20, 15], # Made dots slightly larger
             'Color': ['#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#3B82F6', '#9CA3AF']
         })
         
         fig = px.scatter_mapbox(
             map_data, lat="lat", lon="lon", hover_name="Type", size="Size",
             color="Type", color_discrete_sequence=px.colors.qualitative.Bold,
-            zoom=3, height=500
+            zoom=3, height=600
         )
-        fig.update_layout(mapbox_style="carto-darkmatter", margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="#1E293B", showlegend=True)
+        
+        # --- FIX: CRYSTAL CLEAR LEGEND ---
+        fig.update_layout(
+            mapbox_style="carto-darkmatter", 
+            margin={"r":0,"t":0,"l":0,"b":0}, 
+            paper_bgcolor="#1E293B",
+            legend=dict(
+                title="Asset Types",
+                yanchor="top",
+                y=0.95,
+                xanchor="left",
+                x=0.02,
+                bgcolor="rgba(0,0,0,0.8)", # Dark background box
+                bordercolor="#FFFFFF",
+                borderwidth=1,
+                font=dict(
+                    family="Arial",
+                    size=14,
+                    color="white" # FORCE WHITE TEXT
+                )
+            )
+        )
         st.plotly_chart(fig, use_container_width=True)
 
     with c_right:
