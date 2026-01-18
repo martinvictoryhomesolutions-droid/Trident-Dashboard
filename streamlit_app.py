@@ -24,19 +24,40 @@ if 'leads' not in st.session_state:
         "Offer_Price": [120000, 450000, 320000, 210000]
     })
 
-# --- 2. VISUAL IDENTITY (FIXED METRIC VISIBILITY) ---
+# --- 2. VISUAL IDENTITY (BRUTE FORCE VISIBILITY FIX) ---
 st.markdown("""
     <style>
-    /* Main Background */
+    /* 1. Main Background */
     .stApp { background-color: #0F172A; color: #FFFFFF; }
     
-    /* SIDEBAR FIX */
+    /* 2. SIDEBAR TEXT FIX */
     [data-testid="stSidebar"] { background-color: #1E293B; border-right: 1px solid #475569; }
     [data-testid="stSidebar"] h1, [data-testid="stSidebar"] h2, [data-testid="stSidebar"] h3 { color: #38BDF8 !important; }
-    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] div, [data-testid="stSidebar"] label { color: #FFFFFF !important; font-size: 16px !important; }
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label { color: #FFFFFF !important; font-size: 16px !important; }
     .stRadio label { color: #FFFFFF !important; font-weight: bold !important; }
     
-    /* PANEL BACKGROUNDS */
+    /* 3. METRIC CARD FIX (THE GHOST TEXT) */
+    /* This targets the container of the label */
+    div[data-testid="stMetricLabel"] {
+        font-size: 16px !important;
+        font-weight: bold !important;
+        color: #FFFFFF !important; /* Force White */
+    }
+    /* This targets the text inside the label specifically */
+    div[data-testid="stMetricLabel"] > div {
+        color: #FFFFFF !important;
+    }
+    div[data-testid="stMetricLabel"] p {
+        color: #FFFFFF !important;
+    }
+    
+    /* 4. METRIC VALUES (The Blue Numbers) */
+    div[data-testid="stMetricValue"] { 
+        color: #38BDF8 !important; 
+        font-size: 32px !important; 
+    }
+    
+    /* 5. GENERAL PANELS */
     div[data-testid="stVerticalBlock"] > div { 
         background-color: #1E293B; 
         border-radius: 10px; 
@@ -44,27 +65,12 @@ st.markdown("""
         border: 1px solid #334155; 
     }
     
-    /* --- METRICS FIX (THE GHOST TEXT) --- */
-    /* This forces the label (e.g. "Liquid Capital") to be White */
-    div[data-testid="stMetricLabel"] { 
-        color: #FFFFFF !important; 
-        font-weight: bold !important;
-        font-size: 16px !important;
-    }
-    /* This keeps the value (e.g. "$500,000") Blue */
-    div[data-testid="stMetricValue"] { 
-        color: #38BDF8 !important; 
-        font-size: 28px !important; 
-    }
-    
-    /* INPUTS */
+    /* 6. INPUTS & BUTTONS */
     .stTextInput > div > div > input, .stNumberInput > div > div > input, .stSelectbox > div > div > div {
         color: #FFFFFF !important; 
         background-color: #334155 !important; 
         border: 1px solid #475569;
     }
-    
-    /* BUTTONS */
     div.stButton > button { 
         background-color: #38BDF8; 
         color: #0F172A !important; 
